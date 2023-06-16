@@ -1,0 +1,28 @@
+// Demo.fbs
+
+namespace DM;
+
+enum State:byte { Available = 0, Downloading, Installed = 2 }
+
+// union Component { Asset }
+
+table Progress {
+  total:float;
+  completed:float;
+}
+
+table Asset {
+  name:string;
+  progress:Progress;
+  state:State = Available;
+  components:[Asset];
+}
+
+table Assets {
+  name:string;
+  count:short = 0;
+  enabled:bool = true;
+  assets:[Asset];
+}
+
+root_type Assets;
